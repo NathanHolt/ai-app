@@ -15,16 +15,18 @@ function App() {
 
     let loadInternal = setInterval(() => {
       setLoad(() => {
-        if (load === '....') {
-          setLoad('')
-          return loadInternal
+        if (temp === '....') {
+          // setLoad('')
+          return ''
         }
         else {
-          return load + '.'
+          temp += '.'
+          console.log(temp)
+          return temp
         }
       })
 
-    }, 300)
+    }, 1000)
   }
 
   
@@ -41,7 +43,6 @@ function App() {
           return clearInterval(interval);
         }
         newText = newText + text.charAt(index)
-        console.log(newText)
         index++;
         return (newText + text.charAt(index));
       });
@@ -53,12 +54,12 @@ function App() {
       <div className="chat">
         <form>
           <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" />
-          <button  onClick={(e) => typeText(e, "this is a test that I am doing Fucking fuck fuck this is how testing is done hell yeah babyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy")}>
+          <button  onClick={(e) => loader(e)}>
             <img src={send} alt='Send'></img>
           </button>
         </form>
         <div id="test">
-          {innerText}
+          {load}
         </div>
       </div>
     </div>
