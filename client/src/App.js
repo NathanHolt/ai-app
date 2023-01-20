@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { HomePage, TextPage, SearchPage, CreatePage } from './pages';
 import './App.css';
 
 
@@ -6,7 +7,12 @@ function App() {
   
   return (
     <div className="App">
-      
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/text" element={<TextPage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/create" element={<CreatePage />} />
+      </Routes>
     </div>
   );
 }

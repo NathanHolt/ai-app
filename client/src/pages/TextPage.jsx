@@ -1,6 +1,6 @@
 import { useState } from "react";
-import bot from './assets/bot.svg'
-import user from './assets/user.svg'
+import bot from '../assets/bot.svg'
+import user from '../assets/user.svg'
 import send from '../assets/send.svg'
 
 const TextPage = () => {
