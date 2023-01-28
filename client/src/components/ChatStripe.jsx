@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { Loader } from './'
 import bot from '../assets/bot.svg'
 import user from '../assets/user.svg'
 
-const ChatStripe = ( { isAi, value, uniqueId } ) => {
+const ChatStripe = ( { isAi, value, uniqueId, isLoading } ) => {
     const [innerText, setInnerText] = useState('')
     
     const typeText = (text) => {
@@ -36,7 +37,7 @@ const ChatStripe = ( { isAi, value, uniqueId } ) => {
                         alt={isAi ? 'bot': 'user'}
                     />
                 </div>
-                <div className="message" id={uniqueId}>{innerText}</div>
+                <div className="message" id={uniqueId}>{isLoading ? <Loader /> : innerText}</div>
             </div>
         </div>
     )
