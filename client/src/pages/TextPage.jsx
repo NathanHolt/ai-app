@@ -24,7 +24,7 @@ const TextPage = () => {
 
   const displayAnswers = (e) => {
     e.preventDefault()
-    if (!text) return
+    if (!text || isLoading) return
 
     const idOne = generateUniqueID()
     const idTwo = generateUniqueID()
