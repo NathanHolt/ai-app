@@ -1,7 +1,47 @@
 import { useState } from "react";
-import bot from '../assets/bot.svg'
-import user from '../assets/user.svg'
+import { ChatStripe } from "../components";
 import send from '../assets/send.svg'
+
+
+const TextPage = () => {
+  const [answers, setAnswers] = useState([])
+  const [text, setText] = useState('')
+  const [isAi, setIsAi] = useState(true)
+
+  const generateUniqueID = () => {
+    const timeStamp = Date.now()
+    const randomNumber = Math.random()
+    const hexString = randomNumber.toString(16) 
+
+    return `id-${timeStamp}-${hexString}`
+  }
+
+  const displayAnswers = (e) => {
+    e.preventDefault()
+    const id = generateUniqueID()
+
+    setAnswers([...answers, <ChatStripe key={id} isAi={isAi} value={text} uniqueId={id} />])
+    setIsAi(!isAi)
+  }
+
+  return (
+      <div className="chat">
+          
+          {answers && answers.map((answer) => answer)}
+          
+          <form>
+              <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" onChange={(e) => setText(e.target.value)} />
+              <button  onClick={(e) => displayAnswers(e)}>
+                  <img src={send} alt='Send' />
+              </button>
+          </form>
+      </div>
+  )
+}
+
+export default TextPage
+
+
 
 const testText = `Boxes
 I’ve been accused of out of the box thinking
@@ -19,49 +59,3 @@ But I still can’t help wishing for more
 For differing from others will always be fun
 But differing the same way is a bore
 `
-
-const TextPage = () => {
-    const [innerText, setInnerText] = useState('')
-  
-    
-    const typeText = (e, text) => {
-      e.preventDefault()
-      setInnerText('')
-      let newText = ''
-      let index = 0
-  
-      const interval = setInterval(() => {
-        setInnerText(() => {
-          if (index === text.length) {
-            setInnerText(text);
-            return clearInterval(interval);
-          }
-          newText = newText + text.charAt(index)
-          index++;
-          return (newText + text.charAt(index));
-        });
-      }, 40);
-    }
-
-    const generateUniqueID = () => {
-      const timeStamp = Date.now()
-      const randomNumber = Math.random()
-      const hexString = randomNumber.toString(16) 
-
-      return `id-${timeStamp}-${hexString}`
-    }
-
-    return (
-        <div className="chat">
-            <form>
-                <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" />
-                {innerText}
-                <button  onClick={(e) => typeText(e, testText)}>
-                    <img src={send} alt='Send'></img>
-                </button>
-            </form>
-        </div>
-    )
-}
-
-export default TextPage

@@ -7,11 +7,11 @@
   width: 90vw;
   height: 90vh;
   display: flex;
+  flex-direction: column;
 }
 
 form {
-    width: 90%;
-    height: 90%;
+  height: 20%;
 }
 
 textarea {
@@ -20,8 +20,8 @@ textarea {
 }
 
 img {
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
 }
 
 .loader {
