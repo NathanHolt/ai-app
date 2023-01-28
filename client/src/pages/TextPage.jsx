@@ -3,6 +3,23 @@ import bot from '../assets/bot.svg'
 import user from '../assets/user.svg'
 import send from '../assets/send.svg'
 
+const testText = `Boxes
+I’ve been accused of out of the box thinking
+But I know that is not the case
+I just exist in a different box from you
+And inside I’m running out of space
+
+Upon exploration my box seems to be a circle 
+As I explore my thoughts run round
+Inevitably they run into the same obstacles
+That always causes them to run aground
+
+My box is unusual, and that is a gift
+But I still can’t help wishing for more
+For differing from others will always be fun
+But differing the same way is a bore
+`
+
 const TextPage = () => {
     const [innerText, setInnerText] = useState('')
   
@@ -26,18 +43,23 @@ const TextPage = () => {
       }, 40);
     }
 
+    const generateUniqueID = () => {
+      const timeStamp = Date.now()
+      const randomNumber = Math.random()
+      const hexString = randomNumber.toString(16) 
+
+      return `id-${timeStamp}-${hexString}`
+    }
+
     return (
         <div className="chat">
             <form>
                 <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" />
-                <button  onClick={(e) => typeText(e, "test for scale")}>
+                {innerText}
+                <button  onClick={(e) => typeText(e, testText)}>
                     <img src={send} alt='Send'></img>
                 </button>
             </form>
-
-            <div id="test">
-            {innerText}
-            </div>
         </div>
     )
 }
