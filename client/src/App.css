@@ -24,21 +24,36 @@ img {
   height: 50px;
 }
 
+.chatStripe {
+  display: flex;
+  text-align: left;
+}
+
+.profile, .message {
+  margin: 2%;
+}
+
+
 .loader {
   position: relative;
   width: 300px;
-  height: 200px;
+  height: 60px;
   font-size: 10rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  padding-bottom: 40px;
 }
 
 .loader-comp {
   position: absolute;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 3rem;
 }
-
 
 .loader-dot {
   position: absolute;
