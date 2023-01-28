@@ -2,11 +2,16 @@ import { useState } from "react";
 import { ChatStripe } from "../components";
 import send from '../assets/send.svg'
 
+const testText = `Boxes
+I’ve been accused of out of the box thinking
+But I know that is not the case
+I just exist in a different box from you
+And inside I’m running out of space
+`
 
 const TextPage = () => {
   const [answers, setAnswers] = useState([])
   const [text, setText] = useState('')
-  const [isAi, setIsAi] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
 
   const generateUniqueID = () => {
@@ -22,25 +27,28 @@ const TextPage = () => {
 
     if (!text) return
 
+    const idOne = generateUniqueID()
+    setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />])
+    setText('')
+
     setIsLoading(true)
-    const id = generateUniqueID()
-    //fetch answer here
-    
 
-    setIsLoading(false)
-
-    setAnswers([...answers, <ChatStripe key={id} isAi={isAi} value={text} uniqueId={id} />])
-    setIsAi(!isAi)
+    setTimeout(() => {
+      const idTwo = generateUniqueID()
+      setIsLoading(false)
+      console.log(answers)
+      setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />, <ChatStripe key={idTwo} isAi={true} value={testText} uniqueId={idTwo} />])
+    }, 3000)
   }
 
   return (
       <div className="chat">
           
           {answers && answers.map((answer) => answer)}
-          {isLoading && <ChatStripe isLoading={isLoading} isAi={isAi}  />}
+          {isLoading && <ChatStripe isLoading={isLoading} isAi={true} value=''  />}
           
           <form>
-              <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" onChange={(e) => setText(e.target.value)} />
+              <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" value={text} onChange={(e) => setText(e.target.value)} />
               <button onClick={(e) => displayAnswers(e)}>
                   <img src={send} alt='Send' />
               </button>
@@ -50,3 +58,4 @@ const TextPage = () => {
 }
 
 export default TextPage
+
