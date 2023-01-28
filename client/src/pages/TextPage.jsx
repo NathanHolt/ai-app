@@ -21,7 +21,7 @@ const TextPage = () => {
     e.preventDefault()
 
     if (!text) return
-    
+
     setIsLoading(true)
     const id = generateUniqueID()
     //fetch answer here
@@ -41,7 +41,7 @@ const TextPage = () => {
           
           <form>
               <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" onChange={(e) => setText(e.target.value)} />
-              <button  onClick={(e) => displayAnswers(e)}>
+              <button onClick={(e) => displayAnswers(e)}>
                   <img src={send} alt='Send' />
               </button>
           </form>
@@ -50,22 +50,3 @@ const TextPage = () => {
 }
 
 export default TextPage
-
-
-
-const testText = `Boxes
-I’ve been accused of out of the box thinking
-But I know that is not the case
-I just exist in a different box from you
-And inside I’m running out of space
-
-Upon exploration my box seems to be a circle 
-As I explore my thoughts run round
-Inevitably they run into the same obstacles
-That always causes them to run aground
-
-My box is unusual, and that is a gift
-But I still can’t help wishing for more
-For differing from others will always be fun
-But differing the same way is a bore
-`
