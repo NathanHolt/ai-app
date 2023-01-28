@@ -19,7 +19,7 @@ app.get('/', async (req, res) => {
     res.status(200).send({
         message: 'Hello from the ai'
     })
-})
+}) 
 
 app.post('/', async (req, res) => {
     try {

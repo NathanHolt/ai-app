@@ -22,19 +22,38 @@ const TextPage = () => {
     return `id-${timeStamp}-${hexString}`
   }
 
-  const displayAnswers = (e) => {
+  const displayAnswers = async (e) => {
     e.preventDefault()
     if (!text || isLoading) return
 
     const idOne = generateUniqueID()
     const idTwo = generateUniqueID()
+    let data = testText
     setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />])
 
     setIsLoading(true)
 
+    const response = await fetch('http://localhost:5000', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: text,
+      })
+    })
+
+    if (response.ok) {
+      data = await response.json()
+      data = data.bot.trim()
+    } else {
+      const err = await response.text()
+      data = "Something went wrong"
+    }
+
     setTimeout(() => {
       setIsLoading(false)
-      setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />, <ChatStripe key={idTwo} isAi={true} value={testText} uniqueId={idTwo} />])
+      setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />, <ChatStripe key={idTwo} isAi={true} value={data} uniqueId={idTwo} />])
     }, 3000)
     setText('')
   }
