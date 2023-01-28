@@ -1,9 +1,12 @@
-
+import { Loader } from "../components"
 
 const HomePage = () => {
 
     return (
-        <div>HomePage</div>
+        <div>
+            <div>HomePage</div>
+            <Loader />
+        </div>
     )
 }
 

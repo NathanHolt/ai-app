@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgb(18, 17, 17);
 }
 
 .chat {
@@ -27,4 +28,55 @@ img {
   height: 600px;
   width: 600px;
   background-color: rgb(170, 34, 34);
+}
+
+.loader {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  font-size: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.loader-comp {
+  position: absolute;
+  display: flex;
+}
+
+
+.loader-dot {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.loader-mask {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  background-color: rgb(18, 17, 17);
+  animation: load 3s infinite steps(1);
+}
+
+@keyframes load {
+  0% {
+    width: 100%;
+  }
+  20% {
+    width: 70%;
+  }
+  40% {
+    width: 40%;
+  }
+  60% {
+    width: 20%;
+  }
+  80% {
+    width: 0%;
+  }
+  100% {
+    width: 0%;
+  }
 }

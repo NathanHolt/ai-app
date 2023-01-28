@@ -4,30 +4,7 @@ import user from '../assets/user.svg'
 import send from '../assets/send.svg'
 
 const TextPage = () => {
-
-    const [load, setLoad] = useState('')
     const [innerText, setInnerText] = useState('')
-  
-    const loader = (e) => {
-      e.preventDefault()
-      let temp = ''
-      setLoad('')
-  
-      let loadInternal = setInterval(() => {
-        setLoad(() => {
-          if (temp === '....') {
-            // setLoad('')
-            return ''
-          }
-          else {
-            temp += '.'
-            console.log(temp)
-            return temp
-          }
-        })
-  
-      }, 1000)
-    }
   
     
     const typeText = (e, text) => {
@@ -53,13 +30,13 @@ const TextPage = () => {
         <div className="chat">
             <form>
                 <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" />
-                <button  onClick={(e) => loader(e)}>
+                <button  onClick={(e) => typeText(e, "test for scale")}>
                     <img src={send} alt='Send'></img>
                 </button>
             </form>
 
             <div id="test">
-            {load}
+            {innerText}
             </div>
         </div>
     )
