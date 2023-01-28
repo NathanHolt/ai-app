@@ -2,13 +2,6 @@ import { useState } from "react";
 import { ChatStripe } from "../components";
 import send from '../assets/send.svg'
 
-const testText = `Boxes
-I’ve been accused of out of the box thinking
-But I know that is not the case
-I just exist in a different box from you
-And inside I’m running out of space
-`
-
 const TextPage = () => {
   const [answers, setAnswers] = useState([])
   const [text, setText] = useState('')
@@ -28,10 +21,11 @@ const TextPage = () => {
 
     const idOne = generateUniqueID()
     const idTwo = generateUniqueID()
-    let data = testText
+    let data = ""
     setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />])
 
     setIsLoading(true)
+    setText('')
 
     const response = await fetch('http://localhost:5000', {
       method: 'POST',
@@ -48,14 +42,14 @@ const TextPage = () => {
       data = data.bot.trim()
     } else {
       const err = await response.text()
+      console.log(err)
       data = "Something went wrong"
     }
 
     setTimeout(() => {
       setIsLoading(false)
       setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />, <ChatStripe key={idTwo} isAi={true} value={data} uniqueId={idTwo} />])
-    }, 3000)
-    setText('')
+    }, 1500)
   }
 
   return (
@@ -65,8 +59,8 @@ const TextPage = () => {
           {isLoading && <ChatStripe isLoading={isLoading} isAi={true} value=''  />}
           
           <form>
-              <textarea name="prompt" rows="1" cols="1" placeholder="What are you asking for?" value={text} onChange={(e) => setText(e.target.value)} />
-              <button onClick={(e) => displayAnswers(e)}>
+              <textarea name="prompt" rows="1" cols="1" placeholder="   What are you asking for?" value={text} onChange={(e) => setText(e.target.value)} />
+              <button className="send" onClick={(e) => displayAnswers(e)}>
                   <img src={send} alt='Send' />
               </button>
           </form>
