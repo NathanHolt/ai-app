@@ -24,21 +24,19 @@ const TextPage = () => {
 
   const displayAnswers = (e) => {
     e.preventDefault()
-
     if (!text) return
 
     const idOne = generateUniqueID()
+    const idTwo = generateUniqueID()
     setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />])
-    setText('')
 
     setIsLoading(true)
 
     setTimeout(() => {
-      const idTwo = generateUniqueID()
       setIsLoading(false)
-      console.log(answers)
       setAnswers([...answers, <ChatStripe key={idOne} isAi={false} value={text} uniqueId={idOne} />, <ChatStripe key={idTwo} isAi={true} value={testText} uniqueId={idTwo} />])
     }, 3000)
+    setText('')
   }
 
   return (
