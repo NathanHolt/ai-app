@@ -16,6 +16,10 @@ const SearchPage = () => {
     const [allPosts, setAllPosts] = useState(null)
     const [searchText, setSearchText] = useState('')
 
+    const handleSearchChange = (e) => {
+        console.log(searchText)
+    }
+
     return (
         <div className="page">
             <div>
@@ -24,7 +28,14 @@ const SearchPage = () => {
             </div>
 
             <div>
-                <FormField />
+                <FormField 
+                    labelName='Search posts'
+                    type='text'
+                    name='text'
+                    placeholder='Search something...'
+                    value={searchText}
+                    handleChange={handleSearchChange}
+                />
             </div>
 
             <div>
