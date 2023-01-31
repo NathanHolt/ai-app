@@ -14,8 +14,48 @@ const CreatePage = () => {
     const [generatingImg, setGeneratingImg] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    const handleSubmit = () => {
+        console.log('Submit')
+    }
+    
+    const handleChange = (e) => {
+        console.log('change')
+    }
+    
+    const handleSurpriseMe = () => {  
+        console.log('change')
+    }
+
     return (
-        <div>CreatePage</div>
+        <div className="page">
+            <div>
+                <h1>Create</h1>
+                <p>Create spectacular images with the DALL-E AI and share them with others</p>
+            </div>
+
+            <form onSubmit={handleSubmit()}>
+                <div>
+                    <FormField 
+                        labelName='Your name'
+                        type='text'
+                        name='name'
+                        placeholder='Johnny Doe'
+                        value={form.name}
+                        handleChange={handleChange}
+                    />
+                    <FormField 
+                        labelName='Prompt'
+                        type='text'
+                        name='prompt'
+                        placeholder='A Man falling in Love with his Computer, digital art'
+                        value={form.prompt}
+                        handleChange={handleChange}
+                        isSurpriseMe
+                        handleSurpriseMe={handleSurpriseMe}
+                    />
+                </div>
+            </form>
+        </div>
     )
 }
 

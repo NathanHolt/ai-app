@@ -17,7 +17,7 @@ const SearchPage = () => {
     const [searchText, setSearchText] = useState('')
 
     return (
-        <div>
+        <div className="page">
             <div>
                 <h1>The Image Showcase</h1>
                 <p>Browse through a collection of DALL-E generated images</p>
