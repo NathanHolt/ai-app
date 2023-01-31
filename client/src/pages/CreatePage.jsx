@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { previewState } from "../assets"
+import { preview, previewState } from "../assets"
 import { getRandomPrompt } from "../utils"
 import { FormField, Loader } from "../components"
 
@@ -53,6 +53,20 @@ const CreatePage = () => {
                         isSurpriseMe
                         handleSurpriseMe={handleSurpriseMe}
                     />
+
+                    <div>
+                        {form.photo ? (
+                            <img 
+                                src={form.photo}
+                                alt={form.prompt}
+                            />
+                        ) : (
+                            <img 
+                                src={preview}
+                                alt='preview'
+                            />
+                        )}
+                    </div>
                 </div>
             </form>
         </div>
