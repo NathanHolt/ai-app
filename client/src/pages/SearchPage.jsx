@@ -17,7 +17,7 @@ const SearchPage = () => {
     const [searchText, setSearchText] = useState('')
 
     const handleSearchChange = (e) => {
-        console.log(searchText)
+        console.log("search change")
     }
 
     return (

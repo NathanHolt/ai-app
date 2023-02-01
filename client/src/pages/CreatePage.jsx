@@ -19,17 +19,22 @@ const CreatePage = () => {
     }
     
     const handleChange = (e) => {
-        console.log('change')
+        setForm({ ...form, [e.target.name]: e.target.value })
     }
     
     const handleSurpriseMe = () => {  
-        console.log('change')
+        const randoPrompt = getRandomPrompt(form.prompt)
+        setForm({ ...form, prompt: randoPrompt })
+    }
+
+    const generateImg = () => {
+
     }
 
     return (
         <div className="page">
             <div>
-                <h1>Create</h1>
+                <h1>Image Creator</h1>
                 <p>Create spectacular images with the DALL-E AI and share them with others</p>
             </div>
 
@@ -66,7 +71,26 @@ const CreatePage = () => {
                                 alt='preview'
                             />
                         )}
+
+                        {generatingImg && (
+                            <div>
+                                <Loader />
+                            </div>
+                        )}
                     </div>
+                </div>
+
+                <div>
+                    <button type="button" onClick={generatingImg}>
+                        {generatingImg ? 'Generating...' : 'Generate'}
+                    </button>
+                </div>
+
+                <div>
+                    <p>Once you have created your image, you can share it with others</p>
+                    <button type="submit">
+                        {loading ? 'Sharing...' : 'Share with the community'}
+                    </button>
                 </div>
             </form>
         </div>

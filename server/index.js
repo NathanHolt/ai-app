@@ -1,6 +1,7 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
+import connectDB from './mongodb/connect.js';
 import { Configuration, OpenAIApi } from 'openai';
 
 dotenv.config()
@@ -46,4 +47,14 @@ app.post('/', async (req, res) => {
 })
 
 
-app.listen(5000, () => console.log('listening on port http://localhost:5000'))
+const startServer = async () => {
+
+    try {
+        connectDB(process.env.MONGODB_URL)
+        app.listen(5000, () => console.log('listening on port http://localhost:5000'))
+    } catch (err) {
+        console.log(err)   
+    }
+}
+
+startServer()
