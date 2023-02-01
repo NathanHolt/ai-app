@@ -20,6 +20,33 @@ const SearchPage = () => {
         console.log("search change")
     }
 
+    useEffect(() => {
+      const fetchPosts = async () => {
+        setLoading(true)
+
+        try {
+            const response = await fetch('http://localhost:5000/api/v1/dalle/image', {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            })
+
+            if (response.ok) {
+                const results = await response.json()
+
+                setAllPosts(results.data.reverse())
+            }
+        } catch (err) {
+            console.log(err)
+            alert(err)
+        } finally {
+            setLoading(false)
+        }
+      }
+
+      fetchPosts()
+    }, [])
+    
+
     return (
         <div className="page">
             <div>
@@ -56,7 +83,7 @@ const SearchPage = () => {
                                 />
                             ) : (
                                 <RenderCards 
-                                    data={[]}
+                                    data={allPosts}
                                     title='No posts found'
                                 />
                             )}

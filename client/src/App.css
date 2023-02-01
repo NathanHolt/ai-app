@@ -87,6 +87,55 @@
   color:rgb(65, 63, 63);
 }
 
+.ai-img {
+  height: 40vh;
+  width: 40vh;
+  border: 2px solid rgba(115, 34, 177, .4);
+  border-radius: 5px;
+}
+
+.img-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25vh;
+  justify-content: center;
+  align-self: center;
+}
+
+.ai-div {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+input {
+  width: 40%;
+  /* height: 90%; */
+  font-size: 1.4rem;
+  padding: .2em;
+  margin: .2em;
+  border-radius: 10px;
+  border: 2px solid rgba(115, 34, 177, .4);
+}
+
+button {
+  /* height: 21vh; */
+  border-radius: 5px;
+  padding: .4em;
+  margin: .2em .4em;
+  border: 2px solid rgba(115, 34, 177, .4);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(115, 34, 177);
+}
+
+button:active {
+  background-color: rgb(78, 23, 120);
+}
 
 .chat {
   width: 100%;

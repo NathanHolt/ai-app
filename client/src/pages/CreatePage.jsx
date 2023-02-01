@@ -14,8 +14,28 @@ const CreatePage = () => {
     const [generatingImg, setGeneratingImg] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const handleSubmit = () => {
-        console.log('Submit')
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        if (form.prompt && form.photo) {
+            setLoading(true)
+
+            try {
+                const response = await fetch('http://localhost:5000/api/v1/post', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify(form)
+                })
+
+                await response.json()
+                nav('/search')
+            } catch (err) {
+                console.log(err)
+                alert(err)
+            } finally {
+                setLoading(false)
+            }
+        }
     }
     
     const handleChange = (e) => {
@@ -27,8 +47,27 @@ const CreatePage = () => {
         setForm({ ...form, prompt: randoPrompt })
     }
 
-    const generateImg = () => {
+    const generateImg = async () => {
+        if (form.prompt) {
+            try {
+                setGeneratingImg(true)
+                const response = await fetch('http://localhost:5000/api/v1/dalle/image', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify({ prompt: form.prompt })
+                })
 
+                const data = await response.json()
+
+                setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` })
+            } catch (err) {
+                alert(err)
+            } finally {
+                setGeneratingImg(false)
+            }
+        } else {
+            alert('Please enter a prompt')
+        }
     }
 
     return (
@@ -38,7 +77,7 @@ const CreatePage = () => {
                 <p>Create spectacular images with the DALL-E AI and share them with others</p>
             </div>
 
-            <form onSubmit={handleSubmit()}>
+            <form className="img-form" onSubmit={handleSubmit()}>
                 <div>
                     <FormField 
                         labelName='Your name'
@@ -59,29 +98,29 @@ const CreatePage = () => {
                         handleSurpriseMe={handleSurpriseMe}
                     />
 
-                    <div>
-                        {form.photo ? (
-                            <img 
+                    <div className="ai-div">
+                        {generatingImg ? (
+                            <div className="load-div">
+                                <Loader />
+                            </div>
+                        ) : form.photo ? (
+                            <img
+                                className="ai-img" 
                                 src={form.photo}
                                 alt={form.prompt}
                             />
                         ) : (
                             <img 
+                            className="ai-img" 
                                 src={preview}
                                 alt='preview'
                             />
-                        )}
-
-                        {generatingImg && (
-                            <div>
-                                <Loader />
-                            </div>
                         )}
                     </div>
                 </div>
 
                 <div>
-                    <button type="button" onClick={generatingImg}>
+                    <button type="button" onClick={generateImg}>
                         {generatingImg ? 'Generating...' : 'Generate'}
                     </button>
                 </div>
