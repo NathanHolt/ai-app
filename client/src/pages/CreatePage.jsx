@@ -77,7 +77,7 @@ const CreatePage = () => {
                 <p>Create spectacular images with the DALL-E AI and share them with others</p>
             </div>
 
-            <form className="img-form" onSubmit={handleSubmit()}>
+            <form className="img-form" onSubmit={(e) => handleSubmit(e)}>
                 <div>
                     <FormField 
                         labelName='Your name'
@@ -120,14 +120,14 @@ const CreatePage = () => {
                 </div>
 
                 <div>
-                    <button type="button" onClick={generateImg}>
+                    <button className="btn" type="button" onClick={generateImg}>
                         {generatingImg ? 'Generating...' : 'Generate'}
                     </button>
                 </div>
 
                 <div>
                     <p>Once you have created your image, you can share it with others</p>
-                    <button type="submit">
+                    <button className="btn" type="submit">
                         {loading ? 'Sharing...' : 'Share with the community'}
                     </button>
                 </div>

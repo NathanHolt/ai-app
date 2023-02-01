@@ -14,10 +14,22 @@ const RenderCards = ({ data, title }) => {
 const SearchPage = () => {
     const [loading, setLoading] = useState(false)
     const [allPosts, setAllPosts] = useState(null)
+    const [searchResults, setSearchResults] = useState(null)
+    const [searchTimeout, setSearchTimeout] = useState(null)
     const [searchText, setSearchText] = useState('')
 
     const handleSearchChange = (e) => {
-        console.log("search change")
+        clearTimeout(searchTimeout)
+
+        setSearchText(e.target.value)
+
+        setSearchTimeout(
+            setTimeout(() => {
+                const searchResult = allPosts.filter((post) => post.name.toLowerCase().includes(searchText.toLowerCase()) || post.prompt.toLowerCase().includes(searchText))
+
+                setSearchResults(searchResult)
+            }, 500)
+        )
     }
 
     useEffect(() => {
@@ -25,7 +37,7 @@ const SearchPage = () => {
         setLoading(true)
 
         try {
-            const response = await fetch('http://localhost:5000/api/v1/dalle/image', {
+            const response = await fetch('http://localhost:5000/api/v1/post', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
             })
@@ -75,10 +87,10 @@ const SearchPage = () => {
                         {searchText && (
                             <h2>Showing results for <span>{searchText}</span></h2>
                         )}
-                        <div>
+                        <div className="cards">
                             {searchText ? (
                                 <RenderCards
-                                    data={[]}
+                                    data={searchResults}
                                     title='No search results found'
                                 />
                             ) : (

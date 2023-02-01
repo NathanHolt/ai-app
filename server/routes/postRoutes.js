@@ -42,5 +42,8 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.get('/test', async (req, res) => {
+    res.status(200).json({ success: true, data: "posts" })
+})
 
 export default router

@@ -120,21 +120,42 @@ input {
   border: 2px solid rgba(115, 34, 177, .4);
 }
 
-button {
-  /* height: 21vh; */
+.btn {
   border-radius: 5px;
   padding: .4em;
   margin: .2em .4em;
   border: 2px solid rgba(115, 34, 177, .4);
 }
 
-button:hover {
+.btn:hover {
   cursor: pointer;
   background-color: rgb(115, 34, 177);
 }
 
-button:active {
+.btn:active {
   background-color: rgb(78, 23, 120);
+}
+
+.cards {
+  display: flex;
+  margin-top: 5vh;
+}
+
+.card {
+  height: 50vh;
+  width: 20vw;
+}
+
+.card-img {
+  height: 20vh;
+  width: 20vh;
+  border: 2px solid rgba(115, 34, 177, .4);
+  border-radius: 5px;
+}
+
+.download-btn {
+  height: 25%;
+  width: 60px;
 }
 
 .chat {
